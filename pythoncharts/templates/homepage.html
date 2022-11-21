@@ -1,0 +1,502 @@
+{% include 'applayout.html' %}
+{% block content %}
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<body>
+
+
+   <div ng-app="cmsApp" ng-controller="myCtrl">
+
+
+<div class="container text-center">
+<hr class="border border-primary border-2 opacity-75">
+  
+<div class="form-check form-switch">
+  <input class="form-check-input" type="checkbox" role="switch" ng-model="lrsdue" id="flexSwitchCheckChecked">
+  <label class="form-check-label" for="flexSwitchCheckChecked">LR Due list</label>
+</div>
+</div>
+
+
+
+<div class="container text-center" ng-show = lrsdue>
+  <div class="row">
+
+ 
+
+    <div class="col">
+<hr class="border border-primary border-2 opacity-75">
+
+      <h3>LRS DUE LIST</h3>
+<hr class="border border-primary border-2 opacity-75">
+
+<table class="table table-hover table-bordered" id= "lrtable">
+<thead class="table-primary">
+    <tr>
+      <th scope="col"><input class="col-md-6 form-control" type="text" id="myInputlr" onkeyup="myFunctionlr()" placeholder="Search for names.." title="Type in a name">
+</th>
+      <th scope="col">NRE-GY</th>
+      <th scope="col">NRE-MOO</th>
+      <th scope="col">GY-MOO</th>
+      <th scope="col">MOO-NRE</th>
+
+      <th scope="col">NRE-RU</th>
+      <th scope="col">RU-NRE</th>
+      <th scope="col">NRE-KAPT</th>
+      <th scope="col">KAPT-NRE</th>
+
+      <th scope="col">RU-GDR</th>
+      <th scope="col">GDR-KAPT</th>
+
+      <th scope="col">KAPT-GDR</th>
+      <th scope="col">GDR-RU</th>
+
+      
+    </tr>
+  </thead>
+
+  <tbody>
+{% for lrf in lrfinal %}
+    <tr>
+      <td style="text-align: left;">{{lrf.0}}</td>
+       {% if lrf.1 == "--" %}
+       <td>
+      {% elif lrf.1 != "--" %}
+      <td class="rounded-pill text-bg-warning">
+      {% endif %}
+      {{lrf.1}}</td>
+      {% if lrf.2 == "--" %}
+       <td>
+      {% elif lrf.2 != "--" %}
+      <td class="rounded-pill text-bg-warning">
+      {% endif %}{{lrf.2}}</td>
+      {% if lrf.3 == "--" %}
+       <td>
+      {% elif lrf.3 != "--" %}
+      <td class="rounded-pill text-bg-warning">
+      {% endif %}{{lrf.3}}</td>
+      {% if lrf.4 == "--" %}
+       <td>
+      {% elif lrf.4 != "--" %}
+      <td class="rounded-pill text-bg-warning">
+      {% endif %}{{lrf.4}}</td>
+      {% if lrf.5 == "--" %}
+       <td>
+      {% elif lrf.5 != "--" %}
+      <td class="rounded-pill text-bg-warning">
+      {% endif %}{{lrf.5}}</td>
+      {% if lrf.6 == "--" %}
+       <td>
+      {% elif lrf.6 != "--" %}
+      <td class="rounded-pill text-bg-warning">
+      {% endif %}{{lrf.6}}</td>
+      {% if lrf.7 == "--" %}
+       <td>
+      {% elif lrf.7 != "--" %}
+      <td class="rounded-pill text-bg-warning">
+      {% endif %}{{lrf.7}}</td>
+      {% if lrf.8 == "--" %}
+       <td>
+      {% elif lrf.8 != "--" %}
+      <td class="rounded-pill text-bg-warning">
+      {% endif %}{{lrf.8}}</td>
+      {% if lrf.9 == "--" %}
+       <td>
+      {% elif lrf.9 != "--" %}
+      <td class="rounded-pill text-bg-warning">
+      {% endif %}{{lrf.9}}</td>
+      {% if lrf.10 == "--" %}
+       <td>
+      {% elif lrf.10 != "--" %}
+      <td class="rounded-pill text-bg-warning">
+      {% endif %}{{lrf.10}}</td>
+      {% if lrf.11 == "--" %}
+       <td>
+      {% elif lrf.11 != "--" %}
+      <td class="rounded-pill text-bg-warning">
+      {% endif %}{{lrf.11}}</td>
+      {% if lrf.12 == "--" %}
+       <td>
+      {% elif lrf.12 != "--" %}
+      <td class="rounded-pill text-bg-warning">
+      {% endif %}{{lrf.12}}</td>
+    </tr>
+{% endfor %}
+   
+  </tbody>
+</table> 
+    </div>
+</div>
+</div>
+
+
+<div class="container text-center" ng-hide = lrsdue>
+  <div class="row">
+
+ 
+
+    <div class="col">
+<hr class="border border-primary border-2 opacity-75">
+
+      <h3>REFT DUE LIST</h3>
+<hr class="border border-primary border-2 opacity-75">
+
+<table class="table table-hover" id= "refttable">
+<thead class="table-primary">
+    <tr>
+      <th scope="col"><input class="col-md-6 form-control" type="text" id="myInputreft" onkeyup="myFunctionreft()" placeholder="Search for names.." title="Type in a name">
+</th>
+      <th scope="col">Days
+</th>
+      
+    </tr>
+  </thead>
+
+  <tbody>
+{% for reft in reftdue %}
+    <tr>
+      <td style="text-align: left;">{{reft.0}}</td>
+      <td class=" rounded-pill text-bg-warning" style="font-weight: bold;">{{reft.2}}</td>
+    </tr>
+{% endfor %}
+   
+  </tbody>
+</table> 
+    </div>
+
+
+ <div class="col">
+<hr class="border border-primary border-2 opacity-75">
+
+      <h3>PME DUE LIST</h3>
+<hr class="border border-primary border-2 opacity-75">
+
+<table class="table table-hover" id= "pmetable">
+<thead class="table-primary">
+    <tr>
+      <th scope="col"><input class="col-md-6 form-control" type="text" id="myInputpme" onkeyup="myFunctionpme()" placeholder="Search for names.." title="Type in a name">
+</th>
+      <th scope="col">Days
+</th>
+      
+    </tr>
+  </thead>
+
+  <tbody>
+{% for pme in pmedue %}
+    <tr>
+      <td style="text-align: left;">{{pme.0}}</td>
+      <td class=" rounded-pill text-bg-warning" style="font-weight: bold;">{{pme.2}}</td>
+    </tr>
+{% endfor %}
+   
+  </tbody>
+</table> 
+    </div>
+
+     <div class="col">
+<hr class="border border-primary border-2 opacity-75">
+
+      <h3>REFE DUE LIST</h3>
+<hr class="border border-primary border-2 opacity-75">
+
+<table class="table table-hover" id= "refetable">
+<thead class="table-primary">
+    <tr>
+      <th scope="col"><input class="col-md-6 form-control" type="text" id="myInputrefe" onkeyup="myFunctionrefe()" placeholder="Search for names.." title="Type in a name">
+</th>
+      <th scope="col">Days
+</th>
+      
+    </tr>
+  </thead>
+
+  <tbody>
+{% for refe in refedue %}
+    <tr>
+      <td style="text-align: left;">{{refe.0}}</td>
+      <td class=" rounded-pill text-bg-warning" style="font-weight: bold;">{{refe.2}}</td>
+    </tr>
+{% endfor %}
+   
+  </tbody>
+</table> 
+    </div>
+
+
+     <div class="col">
+<hr class="border border-primary border-2 opacity-75">
+
+      <h3>REFD DUE LIST</h3>
+<hr class="border border-primary border-2 opacity-75">
+
+<table class="table table-hover" id= "refdtable">
+<thead class="table-primary">
+    <tr>
+      <th scope="col"><input class="col-md-6 form-control" type="text" id="myInputrefd" onkeyup="myFunctionrefd()" placeholder="Search for names.." title="Type in a name">
+</th>
+      <th scope="col">Days
+</th>
+      
+    </tr>
+  </thead>
+
+  <tbody>
+{% for refd in refddue %}
+    <tr>
+      <td style="text-align: left;">{{refd.0}}</td>
+      <td class=" rounded-pill text-bg-warning" style="font-weight: bold;">{{refd.2}}</td>
+    </tr>
+{% endfor %}
+   
+  </tbody>
+</table> 
+    </div>
+
+
+
+
+       <div class="col">
+<hr class="border border-primary border-2 opacity-75">
+
+      <h3>PR DUE LIST</h3>
+<hr class="border border-primary border-2 opacity-75">
+
+<table class="table table-hover" id= "prtable">
+<thead class="table-primary">
+    <tr>
+      <th scope="col"><input class="col-md-6 form-control" type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
+</th>
+      <th scope="col">Days
+</th>
+      
+    </tr>
+  </thead>
+
+  <tbody>
+{% for pr in prfinal %}
+    <tr>
+      <td style="text-align: left;">{{pr.1}}</td>
+      <td class=" rounded-pill text-bg-warning" style="font-weight: bold;">{{pr.5}}</td>
+    </tr>
+{% endfor %}
+   
+  </tbody>
+</table>
+
+
+      
+    </div>
+
+
+
+  </div>
+</div>
+
+  </div>
+
+
+
+  <script>
+      var app = angular.module('cmsApp', []);
+
+       app.config(function($interpolateProvider) {
+  $interpolateProvider.startSymbol('{[{');
+  $interpolateProvider.endSymbol('}]}');
+});
+      app.controller('myCtrl', function($scope, $window) {
+        $scope.name= "Rakesh";
+        $scope.gooty = true;
+        $scope.renigunta = true;
+        $scope.kaptnew = true;
+        $scope.lrsdue = false;
+        
+
+       
+
+
+      });
+   </script>
+
+
+
+
+<script>
+function myFunction() {
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("prtable");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+function myFunctionreft() {
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInputreft");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("refttable");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+function myFunctionpme() {
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInputpme");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("refttable");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+
+function myFunctionrefe() {
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInputrefe");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("refetable");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+function myFunctionrefd() {
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInputrefd");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("refdtable");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+function myFunctionlr() {
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInputlr");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("lrtable");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+</script>
+</body>
+{% endblock %}
+
+
+
+
+
+
+
+
+<!--
+ <div style="text-align: center;">
+    
+<h1>Home page</h1>
+
+
+
+  </div>
+
+
+
+<div class="container">
+   <div class="row justify-content-md-center">
+  <form action="" method="POST" enctype="multipart/form-data">
+         
+            {% csrf_token %}
+            
+            <div class="mb-3">
+        <label for="formFile" class="form-label">Please load Signal Sample file</label>
+             <input  class="form-control" type="file" name="signalsample" required="required">
+      </div>
+      <div class="mb-3">
+        <label for="formFile" class="form-label">Please load Signal speed file</label>
+             <input  class="form-control" type="file" name="signalspeed" required="required">
+      </div>
+            <br>
+               <button class="btn btn-primary" type="submit" value="upload">upload</button>
+           
+      </form>
+
+</div>
+</div>
+
+-->
+
+
+
+
+
+<!--
+<table border="1" width="600">
+<tr>
+<td>signal list</td>
+</tr>
+
+{% for y in y %}
+<tr>
+<td>{{ y }}</td>
+</tr>
+{% endfor %}
+
+</table>
+-->
